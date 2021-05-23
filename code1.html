@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Code 1</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">My Projects</a>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul class="links">
+						<li><a href="index.html">Projects</a></li>
+						<li class="active"><a href="code1.html">Code showcase 1</a></li>
+						<li><a href="code2.html">Code showcase 2</a></li>
+					</ul>
+					<ul class="icons">							
+						<li><a target="_blank" href="https://www.linkedin.com/in/dennis-lund-21163687/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+						<!--<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>-->
+					</ul>
+				</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<button onclick="topFunction()" id="myBtn" class="fas fa-angle-up" title="Go to top"></button>
+						<!-- Post -->
+							<section class="post">
+								<header class="major">									
+									<h1>Binary tree</h1>
+									<p>This class contains method that takes numbers as input and creates binary tree structure and prints the tree out in console</p>
+								</header>
+
+								<!-- Preformatted Code -->
+								<h2>Code snippet</h2>
+<pre><code>class BinaryTree
+    {
+        public Node root { get; set; }
+
+        //Checks if root node is empty. If root node is not empty method calls the PrintHelper method.
+        public void Print()
+        {
+            if (root != null)
+            {
+                PrintHelper("-", root);
+            }
+            else
+            {
+                Console.WriteLine("Root is empty.");
+            }
+        }
+
+        // Recursively prints the binary tree.
+        public void PrintHelper(string lvl, Node n)
+        {            
+            Console.WriteLine(lvl+" :" + n.number);
+            lvl += "-";
+            if (n.left != null)
+            {                
+                PrintHelper(lvl,n.left);
+            }
+            if (n.right != null)
+            {                
+                PrintHelper(lvl, n.right);
+            }
+        }
+
+        //Creates new node with input data and loops through the binary tree to insert node in appropriate position.
+        public void Add(int number)
+        {
+            Node n = new Node(number);
+            if (root == null)
+            {
+                root = n;
+            }
+            else
+            {
+                Node i = root;
+                while (true)
+                {
+                    if (i.number > n.number)
+                    {
+                        if (i.left == null)
+                        {
+                            i.left = n;
+                            break;
+                        }
+                        else
+                        {
+                            i = i.left;
+                        }
+                    }
+                    else
+                    {
+                        if (i.right == null)
+                        {
+                            i.right = n;
+                            break;
+                        }
+                        else
+                        {
+                            i = i.right;
+                        }
+                    }
+                }
+            }
+        }        
+
+        //Loops through the binary tree structure and returns a bool depending if input data was found or not.
+        public bool Search(int number)
+        {
+            Node i = root;
+            while (true)
+            {
+                if (i.number > number)
+                {
+                    if (i.left != null)
+                    {
+                        if (i.left.number == number)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            i = i.left;
+                        }
+                    }
+                    else 
+                    {
+                        break; 
+                    }                    
+                }
+                else
+                {
+                    if (i.right != null)
+                    {
+                        if (i.right.number == number)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            i = i.right;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    
+                }
+            }
+            return false;
+        }
+
+        
+    }
+
+    // Node class used to create binary tree structure.
+    class Node
+    {
+        public int number { get; set; }
+        public Node left { get; set; }
+        public Node right { get; set; }
+
+        public Node(int number)
+        {
+            this.number = number;
+        }
+    }</code></pre>
+<h2>Input</h2>
+<pre><code>static void Main(string[] args)
+	{
+		Console.ForegroundColor = ConsoleColor.White;
+		
+		#region tree input
+
+		Console.ForegroundColor = ConsoleColor.Cyan;
+		Console.WriteLine("______________________________Binary Tree____________________________\n");
+		Console.WriteLine("Level | Value\n");
+		Console.ForegroundColor = ConsoleColor.White;
+
+		BinaryTree bt = new BinaryTree();
+
+		List<int> listData = new List<int>();
+
+		listData.Add(2);
+		listData.Add(1);
+		listData.Add(3);
+		listData.Add(7);
+		listData.Add(5);
+		listData.Add(8);
+		listData.Add(0);
+		listData.Add(0);
+
+		//Loop through listData and populate the tree.
+		foreach (int i in listData)
+		{
+			bt.Add(i);
+		}
+
+		//Print the tree.
+		bt.Print();
+
+		Console.ForegroundColor = ConsoleColor.Cyan;            
+		Console.WriteLine("________________________Find specific node___________________________\n");
+		Console.ForegroundColor = ConsoleColor.White;
+
+		//Search for specific number inside the tree structure.
+		int searchInput = 8;
+		Console.WriteLine("Node exist: "+bt.Search(searchInput));
+
+		Console.ForegroundColor = ConsoleColor.Cyan;
+		Console.WriteLine("_____________________________________________________________________\n");
+		Console.ForegroundColor = ConsoleColor.White;
+		#endregion
+	}
+	</code></pre>
+<h2>Output</h2>
+								<div class="image main"><img src="images/Console1.JPG" alt="" /></div>
+								<p>Copy code from <a target="_blank" href="https://pastebin.com/NiuyFYeb">here</a></p>
+								
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">						
+					<section class="split contact">							
+						<section>
+							<h3>Email</h3>
+							<p><a href="mailto:Lunddennis@hotmail.com">Lunddennis@hotmail.com</a></p>
+						</section>
+						<section>
+							<h3>Social</h3>
+							<ul class="icons alt">									
+								<li><a target="_blank" href="https://www.linkedin.com/in/dennis-lund-21163687/" class="icon brands alt fa-linkedin"><span class="label">Linkedin</span></a></li>
+								<!--<li><a target="_blank" href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>-->
+							</ul>
+						</section>
+					</section>
+				</footer>
+
+			<!-- Copyright -->
+				<div id="copyright">
+					<ul><li>&copy; <script>document.write(new Date().getFullYear())</script> Dennis Lund</li></ul>
+				</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script>
+				//Get the button
+				var mybutton = document.getElementById("myBtn");
+				
+				// When the user scrolls down 20px from the top of the document, show the button
+				window.onscroll = function() {scrollFunction()};
+				
+				function scrollFunction() {
+				  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+					mybutton.style.display = "block";
+				  } else {
+					mybutton.style.display = "none";
+				  }
+				}
+				
+				// When the user clicks on the button, scroll to the top of the document
+				function topFunction() {
+				  document.body.scrollTop = 0;
+				  document.documentElement.scrollTop = 0;
+				}
+				</script>
+
+	</body>
+</html>
